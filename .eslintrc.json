@@ -20,7 +20,8 @@
     "extends": "eslint:recommended",
     // define the type of file `script` or `module` for ES6 Modules
     "parserOptions": {
-        "sourceType": "script"
+        "sourceType": "script",
+        "ecmaVersion": 8
     },
     //ESLint rules: Severity Levels: off = 0 | warn = 1 | error = 2
     "rules": {
