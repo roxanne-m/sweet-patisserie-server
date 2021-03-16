@@ -10,15 +10,15 @@ INSERT INTO "create_user" ("id", "username", "name", "password")
 VALUES 
 (
     1,
-    'admin'
+    'admin',
     'Dunder Mifflin Admin',
     -- password = "pass"
     '$2a$10$fCWkaGbt7ZErxaxclioLteLUgg4Q3Rp09WW0s/wSLxDKYsaGYUpjG'
 );
 
-INSERT INTO "new_recipe" ("id", "title", "description")
+INSERT INTO "new_recipe" ("id", "title", "description", "user_id")
 VALUES
-(1, 'Strawberries and Cream Macaroons', 'This recipe makes 32 macaroons.');
+(1, 'Strawberries and Cream Macaroons', 'This recipe makes 32 macaroons.', 1);
 
 INSERT INTO "recipe_ingredients" ("id", "ingredients", "ingredients_recipe_id")
 VALUES
