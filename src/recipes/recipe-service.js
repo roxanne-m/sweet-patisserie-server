@@ -3,15 +3,36 @@
 // This file will store the recipeService object
 // We will put methods on this object that store our transactions.
 const recipeService = {
+  // Get ALL recipes stored by user
   getAllRecipes(knex, user_id) {
-    console.log(user_id, 'USER ID');
     return knex('new_recipe').select('*').where('user_id', user_id);
   },
 
+  // Add a recipe
   addRecipe(knex, newRecipe) {
     return knex('new_recipe')
       .insert(newRecipe)
       .into('new_recipe')
+      .returning('*')
+      .then((rows) => {
+        return rows[0];
+      });
+  },
+  // Add ingredients
+  addIngredients(knex, newIngredients) {
+    return knex('recipe_ingredients')
+      .insert(newIngredients)
+      .into('recipe_ingredients')
+      .returning('*')
+      .then((rows) => {
+        return rows[0];
+      });
+  },
+  // Add instructions
+  addInstructions(knex, newInstructions) {
+    return knex('recipe_instructions')
+      .insert(newInstructions)
+      .into('recipe_instructions')
       .returning('*')
       .then((rows) => {
         return rows[0];
@@ -51,7 +72,7 @@ const recipeService = {
       });
   },
 
-  // deletes a recipe by its id
+  // Delete a recipe by its id
   deleteRecipe(knex, id) {
     return knex('new_recipe').where({ id }).delete();
   },
