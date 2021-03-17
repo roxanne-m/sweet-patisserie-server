@@ -18,7 +18,8 @@ VALUES
 
 INSERT INTO "new_recipe" ("id", "title", "description", "user_id")
 VALUES
-(1, 'Strawberries and Cream Macaroons', 'This recipe makes 32 macaroons.', 1);
+(1, 'Strawberries and Cream Macaroons', 'This recipe makes 32 macaroons.', 1),
+(2, 'Lemon Squares', 'This is a second description for lemon squares', 1);
 
 INSERT INTO "recipe_ingredients" ("id", "ingredients", "ingredients_recipe_id")
 VALUES
@@ -29,7 +30,10 @@ VALUES
 (5, '72 g sugar', 1),
 (6, '2 g salt', 1),
 (7, '4 tbsp unsalted butter', 1),
-(8, '4 oz cream cheese', 1);
+(8, '4 oz cream cheese', 1),
+(9, 'Lemons', 2),
+(10, 'Sugar', 2),
+(11, 'Powdered sugar', 2);
 
 INSERT INTO "recipe_instructions" ("id", "instructions", "instructions_recipe_id")
 VALUES
@@ -88,6 +92,9 @@ with a round tip and fill with frosting. Pipe about a
 tablespoon of frosting onto the bottom of half the shells,
 then sandwich with remaining shells. Store in an airtight
 container in the refrigerator up to three days. Bring to
-room temperature before serving.', 1);
+room temperature before serving.', 1),
+(8, 'Instruction one for lemon squares', 2),
+(9, 'Instruction two for lemon square bars', 2),
+(10, 'Instruction three for lemon square bars', 2);
 
 COMMIT;
