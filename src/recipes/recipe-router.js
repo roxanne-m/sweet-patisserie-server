@@ -28,12 +28,12 @@ const instructionsFormat = (instruction) => ({
   instructions_recipe_id: instruction.instructions_recipe_id,
 });
 
-// GET ALL RECIPES BY USER ID (/api/recipe/user/:user_id)
+// GET ALL RECIPES BY USER ID (/api/recipes/)
 recipeRouter
   .use(requireAuth)
-  .route('/user/:user_id')
+  .route('/')
   .get((req, res, next) => {
-    getAllRecipes(req.app.get('db'), req.params.user_id)
+    getAllRecipes(req.app.get('db'), req.user.id)
       .then((recipes) => {
         if (!recipes) {
           return res.json({
@@ -46,51 +46,65 @@ recipeRouter
       .catch(next);
   });
 
-// POST RECIPE WITH INGREDIENTS AND INSTRUCTIONS (/api/recipe/add_recipe)
+// POST RECIPE WITH INGREDIENTS AND INSTRUCTIONS (/api/recipes/add)
 recipeRouter
   .use(requireAuth)
-  .route('/add_recipe')
+  .route('/add')
   .post(jsonParser, (req, res, next) => {
-    const { title, ingredients, instructions } = req.body;
-    const recipeTitle = { title };
-    const recipeIngredients = { ingredients };
-    const recipeInstructions = { instructions };
+    const { recipe, ingredients, instructions } = req.body;
 
-    if (!recipeTitle) {
+    if (!recipe.title) {
       return res.status(400).json({
         error: { message: `Missing 'title' in request body.` },
       });
     }
-    recipeService.addRecipe(req.app.get('db'), recipeTitle).then((recipe) => {
-      res.status(201).json(recipe.map(recipeFormat));
-    });
-    if (!recipeIngredients) {
+    if (!ingredients) {
       return res.status(400).json({
         error: { message: `Missing 'ingredients' in request body.` },
       });
     }
-    recipeService
-      .addIngredients(req.app.get('db'), recipeIngredients)
-      .then((ingredient) => {
-        res.status(201).json(ingredient.map(ingredientsFormat));
-      });
-
-    if (!recipeInstructions) {
+    if (!instructions) {
       return res.status(400).json({
         error: { message: `Missing 'instructions' in request body.` },
       });
     }
-    recipeService
-      .addInstructions(req.app.get('db'), recipeInstructions)
-      .then((instruction) => {
-        res.status(201).json(instruction.map(instructionsFormat));
-      })
-      .catch(next);
+    recipe.user_id = req.user.id;
+    recipeService.addRecipe(req.app.get('db'), recipe).then((recipe) => {
+      const recipeIngredients = ingredients.map((ingredient) => {
+        return {
+          ingredients: ingredient,
+          ingredients_recipe_id: recipe.id,
+        };
+      });
+
+      recipeService
+        .addIngredients(req.app.get('db'), recipeIngredients)
+        .then((ingredients) => {
+          const recipeInstructions = instructions.map((instruction) => {
+            return {
+              instructions: instruction,
+              instructions_recipe_id: recipe.id,
+            };
+          });
+          recipeService
+            .addInstructions(req.app.get('db'), recipeInstructions)
+
+            .then((instructions) => {
+              res.status(201).json({
+                recipe: recipe,
+                ingredients: ingredients.map(ingredientsFormat),
+                instructions: instructions.map(instructionsFormat),
+              });
+            })
+            .catch(next);
+        })
+        .catch(next);
+    });
   });
 
 recipeRouter
   .route('/:id')
-  // DELETE A RECIPE BY ITS ID (/api/recipe/:id)
+  // DELETE A RECIPE BY ITS ID (/api/recipes/:id)
   .delete((req, res, next) => {
     recipeService
       .deleteRecipe(req.app.get('db'), req.params.id)
@@ -100,7 +114,7 @@ recipeRouter
       .catch(next);
   })
 
-  // GET SPECIFIC RECIPE BY ITS ID (/api/recipe/:id)
+  // GET SPECIFIC RECIPE BY ITS ID (/api/recipes/:id)
   .get((req, res, next) => {
     getRecipeById(req.app.get('db'), req.params.id)
       .then((recipe) => {

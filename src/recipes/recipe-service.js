@@ -25,7 +25,7 @@ const recipeService = {
       .into('recipe_ingredients')
       .returning('*')
       .then((rows) => {
-        return rows[0];
+        return rows;
       });
   },
   // Add instructions
@@ -35,7 +35,7 @@ const recipeService = {
       .into('recipe_instructions')
       .returning('*')
       .then((rows) => {
-        return rows[0];
+        return rows;
       });
   },
 
