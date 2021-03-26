@@ -28,7 +28,7 @@ Spaced Repetition is an app that allows users to save their beloved sweet recipe
 
 ![dashboard](https://user-images.githubusercontent.com/70825798/112699905-1e2e3180-8e4a-11eb-8f70-e8a2fe812f56.JPG)
 
-- When the user clicks ona specific recipe on their dashboard, they will be taken to the recipes page where the entirety of its information is displayed (Ex: title, description, ingredients, instructions)
+- When the user clicks on a specific recipe on their dashboard, they will be taken to the recipes page where the entirety of its information is displayed (Ex: title, description, ingredients, instructions)
 
 ![specificRecipe](https://user-images.githubusercontent.com/70825798/112699996-5d5c8280-8e4a-11eb-8026-c5e53882b330.JPG)
 
