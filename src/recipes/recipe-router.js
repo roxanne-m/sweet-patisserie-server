@@ -37,7 +37,7 @@ recipeRouter
       .then((recipes) => {
         if (!recipes) {
           return res.json({
-            error: `Seems like you do not have any recipes saved, let's create one to get started!`,
+            error: `Missing 'title' in request body.`,
           });
         } else {
           return res.json(recipes.map(recipeFormat));

@@ -171,68 +171,6 @@ describe('User Endpoints', function () {
               })
           );
       });
-
-      //   it(`inserts 1 language with words for the new user`, () => {
-      //     const newUser = {
-      //       username: 'test username',
-      //       password: '11AAaa!!',
-      //       name: 'test name',
-      //     };
-      //     const expectedList = {
-      //       name: 'Spanish',
-      //       total_score: 0,
-      //       words: [
-      //         { original: 'hola', translation: 'hello' },
-      //         { original: 'adios', translation: 'goodbye' },
-      //         { original: 'gato', translation: 'cat' },
-      //         { original: 'perro', translation: 'dog' },
-      //         { original: 'amor', translation: 'love' },
-      //         { original: 'gracias', translation: 'thank you' },
-      //         { original: 'noche', translation: 'night' },
-      //         { original: 'manana', translation: 'morning' },
-      //         { original: 'madrugada', translation: 'early morning' },
-      //         { original: 'tarde', translation: 'afternoon' },
-      //       ],
-      //     };
-      //     return supertest(app)
-      //       .post('/api/user')
-      //       .send(newUser)
-      //       .then((res) =>
-      //         /*
-      //         get languages and words for user that were inserted to db
-      //         */
-      //         db
-      //           .from('language')
-      //           .select(
-      //             'language.*',
-      //             db.raw(
-      //               `COALESCE(
-      //               json_agg(DISTINCT word)
-      //               filter(WHERE word.id IS NOT NULL),
-      //               '[]'
-      //             ) AS words`
-      //             )
-      //           )
-      //           .leftJoin('word', 'word.language_id', 'language.id')
-      //           .groupBy('language.id')
-      //           .where({ user_id: res.body.id })
-      //       )
-      //       .then((dbLists) => {
-      //         expect(dbLists).to.have.length(1);
-
-      //         expect(dbLists[0].name).to.eql(expectedList.name);
-      //         expect(dbLists[0].total_score).to.eql(0);
-
-      //         const dbWords = dbLists[0].words;
-      //         expect(dbWords).to.have.length(expectedList.words.length);
-
-      //         expectedList.words.forEach((expectedWord, w) => {
-      //           expect(dbWords[w].original).to.eql(expectedWord.original);
-      //           expect(dbWords[w].translation).to.eql(expectedWord.translation);
-      //           expect(dbWords[w].memory_value).to.eql(1);
-      //         });
-      //       });
-      //   });
     });
   });
 });
