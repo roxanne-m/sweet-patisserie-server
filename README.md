@@ -76,16 +76,6 @@ Creates new product that requires a title, ingredients, and instructions. The de
 `DELETE /api/products/:product_id` <br/>
 Deletes a specific recipe by its id. <br/>
 
-## Setup
-
-To setup the application
-
-1. Fork and clone the project to your machine
-2. `npm install`. This will also install the application _Cypress.io_ for running browser integration tests
-
-The project expects you have the Spaced repetition API project setup and running on http://localhost:8000.
-
-Find instructions to setup the API here https://github.com/Thinkful-Ed/spaced-repetition-api.
 
 ## Running project
 
