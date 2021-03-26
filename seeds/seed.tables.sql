@@ -18,7 +18,8 @@ VALUES
 INSERT INTO "new_recipe" ("title", "description", "user_id")
 VALUES
 ('Strawberries and Cream Macaroons', 'This recipe makes 32 macaroons.', 1),
-('Lemon Squares', 'This is a second description for lemon squares', 1);
+('Lemon Squares', 'This recipe makes a serving of 36 lemon squares and takes a total time of 55 minutes to complete.', 1),
+('Chocolate Croissants', 'This recipe makes 8 servings.', 1);
 
 INSERT INTO "recipe_ingredients" ("ingredients", "ingredients_recipe_id")
 VALUES
@@ -30,9 +31,21 @@ VALUES
 ('2 g salt', 1),
 ( '4 tbsp unsalted butter', 1),
 ( '4 oz cream cheese', 1),
-( 'Lemons', 2),
-( 'Sugar', 2),
-( 'Powdered sugar', 2);
+( '1 cup butter', 2),
+( 'Half a cup of white sugar', 2),
+( '2 cups all purpose flour', 2),
+( '4 eggs', 2),
+( '2 lemons, juiced', 2),
+('4 cups flour', 3),
+('half a cup of water', 3),
+('half a cup of milk', 3),
+('quarter cup of sugar', 3),
+('2 teaspoons of salt', 3),
+('1 packet of instant dry yeast', 3),
+('3 tablespoons unsalted butter, softened', 3),
+('1 and a quarter cups of cold unsalted butter, cut into half inch slices', 3),
+('1 egg beaten', 3),
+('2 bars sweetened chocolate bar', 3);
 
 INSERT INTO "recipe_instructions" ("instructions", "instructions_recipe_id")
 VALUES
@@ -92,8 +105,37 @@ tablespoon of frosting onto the bottom of half the shells,
 then sandwich with remaining shells. Store in an airtight
 container in the refrigerator up to three days. Bring to
 room temperature before serving.', 1),
-( 'Instruction one for lemon squares', 2),
-('Instruction two for lemon square bars', 2),
-( 'Instruction three for lemon square bars', 2);
+( 'Preheat oven to 350 degrees F', 2),
+('In a medium bowl, blend together softened butter, 2 cups flour and half a cup sugar. Press into the bottom of an ungreased 9x13 inch pan.', 2),
+( 'Bake for 15 to 20 minutes in the preheated oven, or until firm and golden. In another bowl, whisk together the remaining 1 and a half cups sugar and a quarter cup flour. Whisk in the eggs and lemon juice. Pour over the baked crust.', 2),
+('Bake for an additional 20 minutes in the preheated oven. The bars will firm up as they cool. After the pan has cooled, cut into uniform 2 inch squares and arrange in a checker board fashion.', 2),
+('In a large bowl, mix the flour, water, milk, sugar, salt, yeast, and butter.', 3),
+('Once the dough starts to clump, turn it out onto a clean counter.', 3),
+('Lightly knead the dough and form it into a ball, making sure not to over-knead it.', 3),
+('Cover the dough with plastic wrap and refrigerate for one hour.', 3),
+('Slice the cold butter in thirds and place it onto a sheet of parchment paper..', 3),
+('Place another piece of parchment on top of the butter, and beat it with a rolling pin.', 3),
+('Keeping the parchment paper on the butter, use a rolling pin to roll the butter into a 7 inch square, half inch thick. If necessary, use a knife to trim the edges and place the trimmings back on top of the butter and continue to roll into a square.', 3),
+('Transfer the butter layer to the refrigerator.', 3),
+('To roll out the dough, lightly flour the counter. Place the dough on the counter, and push the rolling pin once vertically into the dough and once horizontally to form four quadrants.', 3),
+('Roll out each corner and form a 10 inch square.', 3),
+('Place the butter layer on top of the dough and fold the sides of the dough over the butter, enclosing it completely.', 3),
+('Roll the dough with a rolling pin to seal the seams, making sure to lengthen the dough, rather than widening it.', 3),
+('Transfer the dough to a baking sheet and cover with plastic wrap. Refrigerate for 1 hour.', 3),
+('Roll out the dough on a floured surface until it’s 8 by 24 inches.', 3),
+('Fold the top half down to the middle, and brush off any excess flour.', 3),
+('Fold the bottom half over the top and turn the dough clockwise to the left. This completes the first turn.', 3),
+('Cover and refrigerate for one hour.', 3),
+('Roll out the dough again two more times, completing three turns in total and refrigerating for 1 hour in between each turn. If at anytime the dough or butter begins to soften, stop and transfer back to the fridge.', 3),
+('After the final turn, cover the dough with plastic wrap and refrigerate overnight.', 3),
+('To form the croissants, cut the dough in half. Place one half in the refrigerator.', 3),
+('Flour the surface and roll out the dough into a long narrow strip, about 8 by 40 inches.', 3),
+('With a knife, trim the edges of the dough. Cut the dough into 4 rectangles.', 3),
+('Place the chocolate on the edge of the dough and roll tightly enclosing it in the dough.', 3),
+('Place the croissants on a baking sheet, seam side down. Repeat with the other half of the dough.', 3),
+('Brush the croissants with the beaten egg. Save the rest of the egg wash in the fridge for later.', 3),
+('Place the croissants in a warm place to rise for 1 to 2 hours. Preheat oven to 400 degrees F.', 3),
+('Once the croissants have proofed, brush them with one more layer of egg wash.', 3),
+('Bake for 15 minutes or until golden brown and cooked through. Serve warm.', 3);
 
 COMMIT;
