@@ -1,26 +1,92 @@
-# Express Boilerplate!
+# Sweet Patisserie
 
-This is a boilerplate project used for starting new projects!
+## Description
 
-## Set up
+Spaced Repetition is an app that allows users to save their beloved sweet recipes and have the ability to revist them in order to recreate the magic. Users may register, have their personalized dashboard of their previous saved recipes, delete old recipes, and upload new ones!
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## Link to Live App & Repos
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+- Live App:
+  - https://sweet-patisserie-client-jzdm0fedy-roxanne-m.vercel.app/
+- Server Repo:
+  - https://github.com/roxanne-m/sweet-patisserie-server.git
+- Client Repo:
+  - https://github.com/roxanne-m/sweet-patisserie-client.git
 
-## Scripts
+## Application Features
 
-Start the application `npm start`
+- A landing page explains the purpose of Sweet Patisserie to new and returning users.
 
-Start nodemon for the application `npm run dev`
+![landing](https://user-images.githubusercontent.com/70825798/112699857-f8089180-8e49-11eb-937f-a6da156c1c38.JPG)
 
-Run the tests `npm test`
+- As a returning user, the user may login using their username and password.
+- User can register using their name, a username, and a password. The password must be 8 characters long, must contain one upper case, lower case, number, and special character.
 
-## Deploying
+![register](https://user-images.githubusercontent.com/70825798/112699763-c68fc600-8e49-11eb-9bff-3998dfaff9e8.JPG)
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's main branch.
+- Once logged in, the user will view their dashboard that contains their previously save recipes with their title, description, and a delete button.
+
+![dashboard](https://user-images.githubusercontent.com/70825798/112699905-1e2e3180-8e4a-11eb-8f70-e8a2fe812f56.JPG)
+
+- When the user clicks ona specific recipe on their dashboard, they will be taken to the recipes page where the entirety of its information is displayed (Ex: title, description, ingredients, instructions)
+
+![specificRecipe](https://user-images.githubusercontent.com/70825798/112699996-5d5c8280-8e4a-11eb-8026-c5e53882b330.JPG)
+
+- If the user wishes to create a new recipe, they may click on the "Add Recipe" button where they will be redirected to a page where they will add the title, optional description, list of ingredients, and list of instructions.
+
+![addrecipe](https://user-images.githubusercontent.com/70825798/112700113-a7ddff00-8e4a-11eb-9c91-317bca600717.JPG)
+
+## Tech Stacks Used
+
+- Front-end technologies
+  - Javascript frameworks
+  - CSS grid
+  - React
+  - Deployed via Vercel
+- Back-end technologies
+  - Node.js
+  - RESTful Api
+  - Deployed via Heroku
+- Data Persistence
+  - PostgreSQL
+
+## Documentation of API
+
+### Sweet Patisserie Endpoints
+
+#### Dashboard Recipes Endpoint
+
+`GET /api/recipes` <br/>
+Provides full list of recipe titles and their descriptions saved. <br/>
+
+#### Full Recipes Endpoint
+
+`GET /api/recipes/:recipeId` <br/>
+Provides a specific recipe by its id in its entirety such as the title, description, ingredients, and instructions. <br/>
+
+`POST /api/recipes/add` <br/>
+Creates new product that requires a title, ingredients, and instructions. The description is optional. <br/>
+| Key | Value |
+| ------------- | ------------- |
+| title | Text, required |
+| description | Text, optional |
+| ingredients | Text, required |
+| instructions | Text, required |
+
+`DELETE /api/products/:product_id` <br/>
+Deletes a specific recipe by its id. <br/>
+
+## Setup
+
+To setup the application
+
+1. Fork and clone the project to your machine
+2. `npm install`. This will also install the application _Cypress.io_ for running browser integration tests
+
+The project expects you have the Spaced repetition API project setup and running on http://localhost:8000.
+
+Find instructions to setup the API here https://github.com/Thinkful-Ed/spaced-repetition-api.
+
+## Running project
+
+This is a `create-react-app` project so `npm start` will start the project in development mode with hot reloading by default.
