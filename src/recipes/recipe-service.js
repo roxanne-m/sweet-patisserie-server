@@ -51,7 +51,7 @@ const recipeService = {
       .then((recipe) => {
         return knex('recipe_ingredients')
           .select('*')
-          .where('new_recipe_id', recipe.id)
+          .where('new_recipe_id', recipe.new_recipe_id)
           .then((ingredients) => {
             return {
               ...recipe,
@@ -62,7 +62,7 @@ const recipeService = {
       .then((recipe) => {
         return knex('recipe_instructions')
           .select('*')
-          .where('new_recipe_id', recipe.id)
+          .where('new_recipe_id', recipe.new_recipe_id)
           .then((instructions) => {
             return {
               ...recipe,
