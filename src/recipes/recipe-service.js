@@ -43,7 +43,7 @@ const recipeService = {
   getRecipeById(knex, recipe_id) {
     return knex('new_recipe')
       .select('*')
-      .where('id', recipe_id)
+      .where('new_recipe_id', recipe_id)
       .first()
       .then((recipe) => {
         return recipe;
@@ -51,7 +51,7 @@ const recipeService = {
       .then((recipe) => {
         return knex('recipe_ingredients')
           .select('*')
-          .where('ingredients_recipe_id', recipe.id)
+          .where('new_recipe_id', recipe.id)
           .then((ingredients) => {
             return {
               ...recipe,
@@ -62,7 +62,7 @@ const recipeService = {
       .then((recipe) => {
         return knex('recipe_instructions')
           .select('*')
-          .where('instructions_recipe_id', recipe.id)
+          .where('new_recipe_id', recipe.id)
           .then((instructions) => {
             return {
               ...recipe,
@@ -73,8 +73,8 @@ const recipeService = {
   },
 
   // Delete a recipe by its id
-  deleteRecipe(knex, id) {
-    return knex('new_recipe').where({ id }).delete();
+  deleteRecipe(knex, recipe_id) {
+    return knex('new_recipe').where({ recipe_id }).delete();
   },
 };
 
