@@ -9,7 +9,7 @@ describe('Entry endpoints', () => {
   let db;
 
   const { testUsers } = helpers.makeUsersArray();
-  const testUser = testUser[0];
+  const testUser = testUsers[0];
   const { testRecipes } = helpers.makeRecipesArray();
   const testRecipe = testRecipes[0];
 
