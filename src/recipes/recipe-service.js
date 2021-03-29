@@ -46,6 +46,7 @@ const recipeService = {
       .where('new_recipe_id', new_recipe_id)
       .first()
       .then((recipe) => {
+        console.log(recipe, 'RECIPE');
         return recipe;
       })
       .then((recipe) => {
