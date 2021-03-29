@@ -40,10 +40,10 @@ const recipeService = {
   },
 
   // gets specific recipe with ingredients and instructions
-  getRecipeById(knex, recipe_id) {
+  getRecipeById(knex, new_recipe_id) {
     return knex('new_recipe')
       .select('*')
-      .where('new_recipe_id', recipe_id)
+      .where('new_recipe_id', new_recipe_id)
       .first()
       .then((recipe) => {
         return recipe;
