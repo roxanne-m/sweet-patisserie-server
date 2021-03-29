@@ -11,21 +11,21 @@ const recipeRouter = express.Router();
 const jsonParser = express.json(); //parses incoming requests with JSON payloads and is based on body-parser
 
 const recipeFormat = (recipe) => ({
-  id: recipe.id,
+  id: recipe.new_recipe_id,
   title: xss(recipe.title),
   description: xss(recipe.description),
 });
 
 const ingredientsFormat = (ingredient) => ({
-  id: ingredient.id,
+  id: ingredient.recipe_ingredients_id,
   ingredients: xss(ingredient.ingredients),
-  ingredients_recipe_id: ingredient.ingredients_recipe_id,
+  ingredients_recipe_id: ingredient.new_recipe_id,
 });
 
 const instructionsFormat = (instruction) => ({
-  id: instruction.id,
+  id: instruction.recipe_instructions_id,
   instructions: xss(instruction.instructions),
-  instructions_recipe_id: instruction.instructions_recipe_id,
+  instructions_recipe_id: instruction.new_recipe_id,
 });
 
 // GET ALL RECIPES BY USER ID (/api/recipes/)
@@ -33,7 +33,7 @@ recipeRouter
   .use(requireAuth)
   .route('/')
   .get((req, res, next) => {
-    getAllRecipes(req.app.get('db'), req.user.id)
+    getAllRecipes(req.app.get('db'), req.user.user_id)
       .then((recipes) => {
         if (!recipes) {
           return res.json({
@@ -68,12 +68,12 @@ recipeRouter
         error: { message: `Missing 'instructions' in request body.` },
       });
     }
-    recipe.user_id = req.user.id;
+    recipe.user_id = req.user.user_id;
     recipeService.addRecipe(req.app.get('db'), recipe).then((recipe) => {
       const recipeIngredients = ingredients.map((ingredient) => {
         return {
           ingredients: ingredient,
-          ingredients_recipe_id: recipe.id,
+          ingredients_recipe_id: recipe.new_recipe_id,
         };
       });
 
@@ -83,7 +83,7 @@ recipeRouter
           const recipeInstructions = instructions.map((instruction) => {
             return {
               instructions: instruction,
-              instructions_recipe_id: recipe.id,
+              instructions_recipe_id: recipe.new_recipe_id,
             };
           });
           recipeService
@@ -107,7 +107,7 @@ recipeRouter
   // DELETE A RECIPE BY ITS ID (/api/recipes/:id)
   .delete((req, res, next) => {
     recipeService
-      .deleteRecipe(req.app.get('db'), req.params.id)
+      .deleteRecipe(req.app.get('db'), req.params.new_recipe_id)
       .then(() => {
         res.status(204).end();
       })
@@ -116,7 +116,7 @@ recipeRouter
 
   // GET SPECIFIC RECIPE BY ITS ID (/api/recipes/:id)
   .get((req, res, next) => {
-    getRecipeById(req.app.get('db'), req.params.id)
+    getRecipeById(req.app.get('db'), req.params.new_recipe_id)
       .then((recipe) => {
         res.json(recipe);
       })
