@@ -1,7 +1,7 @@
 'use strict';
 
 require('dotenv').config();
-const pg = require('pg');
+
 const knex = require('knex');
 const app = require('./app');
 if (process.env.NODE_ENV === 'production') {
