@@ -11,21 +11,21 @@ const recipeRouter = express.Router();
 const jsonParser = express.json(); //parses incoming requests with JSON payloads and is based on body-parser
 
 const recipeFormat = (recipe) => ({
-  id: recipe.new_recipe_id,
+  new_recipe_id: recipe.new_recipe_id,
   title: xss(recipe.title),
   description: xss(recipe.description),
 });
 
 const ingredientsFormat = (ingredient) => ({
-  id: ingredient.recipe_ingredients_id,
+  recipe_ingredients_id: ingredient.recipe_ingredients_id,
   ingredients: xss(ingredient.ingredients),
-  ingredients_recipe_id: ingredient.new_recipe_id,
+  new_recipe_id: ingredient.new_recipe_id,
 });
 
 const instructionsFormat = (instruction) => ({
-  id: instruction.recipe_instructions_id,
+  recipe_instructions_id: instruction.recipe_instructions_id,
   instructions: xss(instruction.instructions),
-  instructions_recipe_id: instruction.new_recipe_id,
+  new_recipe_id: instruction.new_recipe_id,
 });
 
 // GET ALL RECIPES BY USER ID (/api/recipes/)
@@ -69,11 +69,12 @@ recipeRouter
       });
     }
     recipe.user_id = req.user.user_id;
+
     recipeService.addRecipe(req.app.get('db'), recipe).then((recipe) => {
       const recipeIngredients = ingredients.map((ingredient) => {
         return {
           ingredients: ingredient,
-          ingredients_recipe_id: recipe.new_recipe_id,
+          new_recipe_id: recipe.new_recipe_id,
         };
       });
 
@@ -83,7 +84,7 @@ recipeRouter
           const recipeInstructions = instructions.map((instruction) => {
             return {
               instructions: instruction,
-              instructions_recipe_id: recipe.new_recipe_id,
+              new_recipe_id: recipe.new_recipe_id,
             };
           });
           recipeService
@@ -107,7 +108,7 @@ recipeRouter
   // DELETE A RECIPE BY ITS ID (/api/recipes/:id)
   .delete((req, res, next) => {
     recipeService
-      .deleteRecipe(req.app.get('db'), req.params.new_recipe_id)
+      .deleteRecipe(req.app.get('db'), req.params.id)
       .then(() => {
         res.status(204).end();
       })
@@ -116,7 +117,7 @@ recipeRouter
 
   // GET SPECIFIC RECIPE BY ITS ID (/api/recipes/:id)
   .get((req, res, next) => {
-    getRecipeById(req.app.get('db'), req.params.new_recipe_id)
+    getRecipeById(req.app.get('db'), req.params.id)
       .then((recipe) => {
         res.json(recipe);
       })

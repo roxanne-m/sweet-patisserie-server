@@ -46,7 +46,6 @@ const recipeService = {
       .where('new_recipe_id', new_recipe_id)
       .first()
       .then((recipe) => {
-        console.log(recipe, 'RECIPE');
         return recipe;
       })
       .then((recipe) => {
@@ -74,8 +73,8 @@ const recipeService = {
   },
 
   // Delete a recipe by its id
-  deleteRecipe(knex, recipe_id) {
-    return knex('new_recipe').where({ recipe_id }).delete();
+  deleteRecipe(knex, new_recipe_id) {
+    return knex('new_recipe').where({ new_recipe_id }).delete();
   },
 };
 
