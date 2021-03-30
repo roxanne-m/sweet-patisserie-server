@@ -15,7 +15,7 @@ describe('Protected Endpoints', function () {
 
   after('disconnect from db', () => db.destroy());
 
-  before('cleanup', () => helpers.cleanTables(db));
+  before('clean the table', () => helpers.truncateAllTables(db));
 
   afterEach('cleanup', () => helpers.cleanTables(db));
 
@@ -30,11 +30,6 @@ describe('Protected Endpoints', function () {
       method: supertest(app).get,
     },
 
-    // {
-    //   name: 'POST /api/recipes',
-    //   path: '/api/recipes/add',
-    //   method: supertest(app).post,
-    // },
     {
       name: 'PUT /api/auth/token',
       path: '/api/auth/token',

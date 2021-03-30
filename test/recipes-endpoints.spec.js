@@ -5,13 +5,11 @@ const supertest = require('supertest');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe('Entry endpoints', () => {
+describe('Recipe endpoints', () => {
   let db;
 
-  const { testUsers } = helpers.makeUsersArray();
+  const { testUsers, testRecipes } = helpers.makeAllFixtures();
   const testUser = testUsers[0];
-  const { testRecipes } = helpers.makeRecipesArray();
-  const testRecipe = testRecipes[0];
 
   before('Make the knex instance', () => {
     db = knex({
@@ -22,26 +20,32 @@ describe('Entry endpoints', () => {
   });
   after('disconnect from the database', () => db.destroy());
 
-  before('clean the table', () => helpers.cleanTables());
+  before('clean the table', () => helpers.truncateAllTables(db));
 
-  afterEach('cleanup', () => helpers.cleanTables());
+  afterEach('cleanup', () => helpers.truncateAllTables(db));
+
+  after(`Destroy the connection`, () => db.destroy());
 
   describe('GET /api/recipes', () => {
-    context('given there are no entries', () => {
-      it('returns a 200 and an empty array', () => {
+    context('Given there are no recipes', () => {
+      beforeEach(`Seed user table before each test in this context`, () =>
+        helpers.seedUsers(db, testUsers)
+      );
+
+      it(`GET /api/recipes responds with 200 and an empty array`, () => {
         return supertest(app)
-          .get('/api/entry')
-          .set('Authorization', helpers.makeAuthHeader(testUser))
+          .get('/api/recipes')
+          .set('Authorization', helpers.makeJWTAuthHeader(testUser))
           .expect(200, []);
       });
     });
 
-    context('given there are entries', () => {
-      beforeEach('add recipes', () => {
-        return db.into('new_recipe').insert(testRecipes);
+    context('Given there are recipes in the database', () => {
+      beforeEach(`Seed all tables before each test in this context`, () => {
+        return helpers.seedAllTables(db, testUsers, testRecipes);
       });
 
-      it('returns a 200 and all recipes', () => {
+      it('GET /api/recipes responds with 200 and all recipes', () => {
         return supertest(app).get('/api/recipes').expect(200, testRecipes);
       });
     });

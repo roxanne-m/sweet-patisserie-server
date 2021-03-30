@@ -9,7 +9,7 @@ require('dotenv').config();
 
 process.env.TEST_DATABASE_URL =
   process.env.TEST_DATABASE_URL ||
-  'postgresql://dunder_mifflin@localhost/sweetpatisserie_test';
+  'postgresql://dunder_mifflin@localhost/sweetpatisserrie_test';
 
 const { expect } = require('chai');
 const supertest = require('supertest');

@@ -16,7 +16,7 @@ describe('User Endpoints', function () {
 
   after('disconnect from db', () => db.destroy());
 
-  before('cleanup', () => helpers.cleanTables(db));
+  before('clean the table', () => helpers.truncateAllTables(db));
 
   afterEach('cleanup', () => helpers.cleanTables(db));
 
