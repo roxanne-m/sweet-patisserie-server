@@ -105,13 +105,12 @@ function seedAllTables(db, users, recipes) {
   });
 }
 
-// used for recipe endpoints spec
+// cleans/truncates tables
 function truncateAllTables(db) {
   return db.raw(`TRUNCATE create_user, new_recipe RESTART IDENTITY CASCADE;`);
 }
 
 // Function to create auth token
-
 function makeJWTAuthHeader(user, secret = process.env.JWT_SECRET) {
   const token = jwt.sign({ user_id: user.user_id }, secret, {
     subject: user.user_name,
