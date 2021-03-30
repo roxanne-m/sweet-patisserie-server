@@ -7,7 +7,7 @@ Spaced Repetition is an app that allows users to save their beloved sweet recipe
 ## Link to Live App & Repos
 
 - Live App:
-  - https://sweet-patisserie-client-jzdm0fedy-roxanne-m.vercel.app/
+  - https://sweet-patisserie-client.vercel.app/
 - Server Repo:
   - https://github.com/roxanne-m/sweet-patisserie-server.git
 - Client Repo:
