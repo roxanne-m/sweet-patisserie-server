@@ -46,7 +46,10 @@ describe('Recipe endpoints', () => {
       });
 
       it('GET /api/recipes responds with 200 and all recipes', () => {
-        return supertest(app).get('/api/recipes').expect(200, testRecipes);
+        return supertest(app)
+          .get('/api/recipes')
+          .set('Authorization', helpers.makeJWTAuthHeader(testUser))
+          .expect(200, testRecipes);
       });
     });
   });

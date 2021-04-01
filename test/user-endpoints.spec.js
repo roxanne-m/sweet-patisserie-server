@@ -18,7 +18,7 @@ describe('User Endpoints', function () {
 
   before('clean the table', () => helpers.truncateAllTables(db));
 
-  afterEach('cleanup', () => helpers.cleanTables(db));
+  afterEach('cleanup', () => helpers.truncateAllTables(db));
 
   /**
    * @description Register a user and populate their fields
@@ -128,6 +128,7 @@ describe('User Endpoints', function () {
     describe(`Given a valid user`, () => {
       it(`responds 201, serialized user with no password`, () => {
         const newUser = {
+          user_id: '1',
           username: 'test username',
           password: '11AAaa!!',
           name: 'test name',

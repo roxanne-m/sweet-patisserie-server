@@ -21,14 +21,9 @@ app.use(
 app.use(helmet());
 app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
-
+app.use(errorHandler);
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/recipes', recipeRouter);
-
-app.use(errorHandler);
 
 module.exports = app;

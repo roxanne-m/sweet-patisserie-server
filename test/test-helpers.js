@@ -89,8 +89,8 @@ async function seedUsers(db, users) {
   return db.transaction(async (trx) => {
     await trx.into('create_user').insert(preppedUsers);
 
-    await trx.raw(`SELECT setval('user_id_seq', ?)`, [
-      users[users.length - 1].id,
+    await trx.raw(`SELECT setval('create_user_user_id_seq', ?)`, [
+      users[users.length - 1].user_id,
     ]);
   });
 }
@@ -99,8 +99,8 @@ function seedAllTables(db, users, recipes) {
   return db.transaction(async (trx) => {
     await seedUsers(trx, users);
     await trx('new_recipe').insert(recipes);
-    await trx.raw(`SELECT setval('new_recipe_id_seq', ?)`, [
-      recipe[recipe.length - 1].new_recipe_id,
+    await trx.raw(`SELECT setval('new_recipe_new_recipe_id_seq', ?)`, [
+      recipes[recipes.length - 1].new_recipe_id,
     ]);
   });
 }
@@ -113,7 +113,7 @@ function truncateAllTables(db) {
 // Function to create auth token
 function makeJWTAuthHeader(user, secret = process.env.JWT_SECRET) {
   const token = jwt.sign({ user_id: user.user_id }, secret, {
-    subject: user.user_name,
+    subject: user.username,
     algorithm: 'HS256',
   });
 

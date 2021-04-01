@@ -18,7 +18,9 @@ describe('Auth Endpoints', function () {
 
   before('clean the table', () => helpers.truncateAllTables(db));
 
-  afterEach('cleanup', () => helpers.cleanTables(db));
+  afterEach('cleanup', () => helpers.truncateAllTables(db));
+
+  after(`Destroy the connection`, () => db.destroy());
 
   /**
    * @description Get token for login
@@ -106,7 +108,7 @@ describe('Auth Endpoints', function () {
       );
       return supertest(app)
         .put('/api/auth/token')
-        .set('Authorization', helpers.makeAuthHeader(testUser))
+        .set('Authorization', helpers.makeJWTAuthHeader(testUser))
         .expect(200, {
           authToken: expectedToken,
         });

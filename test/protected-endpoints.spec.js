@@ -17,7 +17,7 @@ describe('Protected Endpoints', function () {
 
   before('clean the table', () => helpers.truncateAllTables(db));
 
-  afterEach('cleanup', () => helpers.cleanTables(db));
+  afterEach('cleanup', () => helpers.truncateAllTables(db));
 
   beforeEach('insert users', () => {
     return helpers.seedUsers(db, testUsers);
@@ -52,7 +52,7 @@ describe('Protected Endpoints', function () {
           .method(endpoint.path)
           .set(
             'Authorization',
-            helpers.makeAuthHeader(validUser, invalidSecret)
+            helpers.makeJWTAuthHeader(validUser, invalidSecret)
           )
           .expect(401, { error: `Unauthorized request` });
       });
@@ -61,7 +61,7 @@ describe('Protected Endpoints', function () {
         const invalidUser = { username: 'user-not-existy', id: 1 };
         return endpoint
           .method(endpoint.path)
-          .set('Authorization', helpers.makeAuthHeader(invalidUser))
+          .set('Authorization', helpers.makeJWTAuthHeader(invalidUser))
           .expect(401, { error: `Unauthorized request` });
       });
     });
