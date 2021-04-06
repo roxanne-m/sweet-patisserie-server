@@ -2,7 +2,7 @@
 
 ## Description
 
-Spaced Repetition is an app that allows users to save their beloved sweet recipes and have the ability to revist them in order to recreate the magic. Users may register, have their personalized dashboard of their previous saved recipes, delete old recipes, and upload new ones!
+Sweet Patisserie is an app that allows users to save their beloved sweet recipes and have the ability to revist them in order to recreate the magic. Users may register, have their personalized dashboard of their previous saved recipes, delete old recipes, and upload new ones!
 
 ## Link to Live App & Repos
 
@@ -75,7 +75,6 @@ Creates new product that requires a title, ingredients, and instructions. The de
 
 `DELETE /api/products/:product_id` <br/>
 Deletes a specific recipe by its id. <br/>
-
 
 ## Running project
 
